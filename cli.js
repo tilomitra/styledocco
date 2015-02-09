@@ -194,7 +194,7 @@ var cli = function(options) {
   // Fetch all static resources.
   async.parallel({
     template: function(cb) {
-      fs.readFile(resourcesDir + 'docs.jade', 'utf8', function(err, contents) {
+      fs.readFile(resourcesDir + options.layout, 'utf8', function(err, contents) {
         if (err != null) return cb(err);
         cb(null, jade.compile(contents));
       });

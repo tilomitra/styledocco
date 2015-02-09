@@ -34,6 +34,7 @@ var isArray = function(obj) {
 var options = optimist
   .usage('Usage: $0 [options] [INPUT]')
   .describe('name', 'Name of the project').alias('n', 'name')
+  .describe('layout', 'Layout File').alias('l', 'layout')
   .describe('out', 'Output directory').alias('o', 'out')['default']('out', 'docs')
   .describe('preprocessor', 'Custom preprocessor command')
   .describe('include', 'Extra CSS/JavaScript to include in previews')
@@ -61,6 +62,10 @@ if (fs.statSync(options.basePath).isFile()) {
 if (options.name == null) {
   try { options.name = require(process.cwd() + '/package').name; }
   catch (ex) { options.name = ''; }
+}
+
+if (options.layout == null) {
+  options.layout = 'docs.jade';
 }
 
 require('../cli.js')(options);
